@@ -19,16 +19,6 @@ const Clinic = () => {
         <p>Welcome, <span style={styles.highlight}>Clinic</span></p>
       </header>
 
-      {/* Sidebar */}
-      <nav style={styles.sidebar}>
-        <ul>
-          <li style={styles.navItem}><a href="/overview">Overview</a></li>
-          <li style={styles.navItem}><a href="/general">General</a></li>
-          <li style={styles.navItem}><a href="/history">History</a></li>
-          <li style={styles.navItem}><a href="/settings">Settings</a></li>
-        </ul>
-      </nav>
-
       {/* Main Content */}
       <main style={styles.main}>
         {/* Dashboard Tiles */}
