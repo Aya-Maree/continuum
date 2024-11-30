@@ -15,7 +15,7 @@ const Coordinator = () => {
     <div className="dashboard-container" style={styles.container}>
       {/* Header */}
       <header style={styles.header}>
-        <h1>Continuum</h1>
+        <h1>continuum</h1>
         <p>Welcome, <span style={styles.highlight}>Coordinator Jane Doe</span></p>
       </header>
 
@@ -97,22 +97,24 @@ const styles = {
     flexDirection: 'column',
     fontFamily: 'Arial, sans-serif',
     height: '100vh',
+    backgroundColor: '#f4f7f5', // Light sage background
   },
   header: {
-    backgroundColor: '#1a202c', // Darker background for branding
+    backgroundColor: '#2f4f4f', // Dark evergreen
     color: '#fff',
     padding: '1rem',
     textAlign: 'center',
   },
   highlight: {
-    color: '#3182ce', // Blue accent for branding
+    color: '#9abf88', // Sage green accent
     fontWeight: 'bold',
   },
   sidebar: {
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#e6edea', // Light sage green
     width: '15%',
     padding: '1rem',
     float: 'left',
+    color: '#2f4f4f', // Evergreen text
   },
   navItem: {
     margin: '0.5rem 0',
@@ -120,7 +122,7 @@ const styles = {
   main: {
     flex: 1,
     padding: '1rem',
-    backgroundColor: '#edf2f7',
+    backgroundColor: '#f9fbf9', // Very light sage
   },
   tilesContainer: {
     display: 'flex',
@@ -128,8 +130,8 @@ const styles = {
     marginBottom: '1rem',
   },
   tile: {
-    backgroundColor: '#3182ce', // Continuum's branding blue
-    color: '#fff',
+    backgroundColor: '#6b8f71', // Sage green
+    color: '#f4f7f5', // Light sage text
     padding: '2rem',
     borderRadius: '8px',
     textAlign: 'center',
@@ -158,9 +160,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     padding: '0.5rem 0',
+    color: '#2f4f4f', // Evergreen text
   },
   feedIcon: {
     marginRight: '0.5rem',
+    color: '#6b8f71', // Sage green icons
   },
   feedTime: {
     color: '#888',
@@ -176,8 +180,8 @@ const styles = {
   footer: {
     display: 'flex',
     justifyContent: 'space-between',
-    backgroundColor: '#2d3748', // Darker footer
-    color: '#fff',
+    backgroundColor: '#2f4f4f', // Dark evergreen
+    color: '#f4f7f5', // Light sage
     padding: '1rem',
   },
 };
