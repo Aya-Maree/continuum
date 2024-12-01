@@ -14,7 +14,7 @@ const Patient = () => {
     const script = document.createElement("script");
     script.type = "text/javascript";
     script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
-    
+
     // Define the script's onload behavior
     script.onload = () => {
       window.voiceflow.chat.load({
