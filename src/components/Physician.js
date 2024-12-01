@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PatientFiles from './PatientFiles';
+import Map from "./Map/Map";
 
 const Physician = () => {
   const [showPatientFiles, setShowPatientFiles] = useState(false);
@@ -11,7 +12,7 @@ const Physician = () => {
   ];
 
   const feeds = [
-    { icon: '👤', title: 'Patient Information Uploaded', time: '3 mins' },
+    { icon: '👤', title:  'Patient Information Uploaded', time: '3 mins' },
     { icon: '🔔', title: 'Clinic Update', time: '10 mins' },
     { icon: '👥', title: 'Patient Update', time: '16 mins' },
     { icon: '💬', title: 'New Message from Patient', time: '19 mins' },
@@ -58,26 +59,26 @@ const Physician = () => {
               </div>
             </div>
 
-            {/* Feeds and Regions */}
-            <div style={styles.feedsRegions}>
-              <div style={styles.feeds}>
-                <h2>Feeds</h2>
-                <ul style={styles.feedList}>
-                  {feeds.map((feed, index) => (
-                    <li key={index} style={styles.feedItem}>
-                      <span style={styles.feedIcon}>{feed.icon}</span>
-                      <span>{feed.title}</span>
-                      <span style={styles.feedTime}>{feed.time}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div style={styles.region}>
-                <h2>Regions</h2>
-                <p>Google Regional Map</p>
-              </div>
-            </div>
-          </main>
+        {/* Feeds and Regions */}
+        <div style={styles.feedsRegions}>
+          <div style={styles.feeds}>
+            <h2>Feeds</h2>
+            <ul style={styles.feedList}>
+              {feeds.map((feed, index) => (
+                <li key={index} style={styles.feedItem}>
+                  <span style={styles.feedIcon}>{feed.icon}</span>
+                  <span>{feed.title}</span>
+                  <span style={styles.feedTime}>{feed.time}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div style={styles.region}>
+            <h2>Regions</h2>
+            <Map/>
+          </div>
+        </div>
+      </main>
 
           {/* Footer */}
           <footer style={styles.footer}>

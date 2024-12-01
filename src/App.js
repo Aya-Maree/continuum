@@ -5,6 +5,7 @@ import Clinic from './components/Clinic';
 import Coordinator from './components/Coordinator';
 import Patient from './components/Patient';
 import Physician from './components/Physician';
+import FeedDetail from './components/FeedDetail';
 import PatientFiles from './components/PatientFiles';
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
         <Route path="/coordinators" element={<Coordinator />} />
         <Route path="/patient" element={<Patient />} />
         <Route path="/physician" element={<Physician />} />
+        <Route path="/feeds/:id" element={<FeedDetail />} />
         <Route path="/files" element={<PatientFiles />} />
 
 
