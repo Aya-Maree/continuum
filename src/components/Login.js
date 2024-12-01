@@ -4,16 +4,40 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Placeholder logic for authentication
+
     if (username === '' || password === '') {
       setError('Both fields are required.');
-    } else {
-      console.log('Logging in:', username);
-      setError('');
-      // Navigate to the dashboard or handle login logic
+      return;
+    }
+
+    try {
+      // Send login request to the backend
+      const response = await fetch('http://localhost:4000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message); // Display success message
+        setError('');
+        // Redirect based on role or endpoint
+        if (data.redirectTo === '/patient') {
+          window.location.href = '/patient'; // Replace with React Router navigation if using it
+        } else if (data.redirectTo === '/physician') {
+          window.location.href = '/physician'; // Replace with React Router navigation if using it
+        }
+      } else {
+        setError(data.error || 'Invalid login credentials.');
+      }
+    } catch (err) {
+      setError('Something went wrong. Please try again later.');
     }
   };
 
@@ -28,6 +52,7 @@ const Login = () => {
         <div style={styles.card}>
           <h2 style={styles.title}>Login</h2>
           {error && <p style={styles.error}>{error}</p>}
+          {message && <p style={styles.message}>{message}</p>}
           <form onSubmit={handleLogin} style={styles.form}>
             <div style={styles.inputGroup}>
               <label htmlFor="username" style={styles.label}>
