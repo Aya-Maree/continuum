@@ -21,6 +21,15 @@ const Patient = () => {
         verify: { projectID: "674b77a6da1cb2ab8ae7db8e" },
         url: "https://general-runtime.voiceflow.com",
         versionID: "production",
+        voice: true, 
+          open: false, 
+          position: "bottom-left", 
+          theme: {
+            primaryColor: "#4CAF50", // Green theme
+            textColor: "#000000", // Black text
+            backgroundColor: "#F4F4F4",
+            bubbleColor: "#FFFFFF", 
+          },
       });
     };
 
