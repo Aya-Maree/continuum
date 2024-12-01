@@ -44,7 +44,7 @@ const Physician = () => {
             {/* Dashboard Tiles */}
             <div style={styles.tilesContainer}>
               <div style={styles.tile}>
-                <h2>Clinic Navigation</h2>
+                <h2 style={styles.font}>Clinic Navigation</h2>
                 <p>Navigate through clinic-specific options here.</p>
               </div>
               <div style={styles.tile}>
@@ -111,7 +111,7 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: 'Arial, sans-serif',
+    
     height: '100vh',
     backgroundColor: '#f4f7f5', // Light sage background
   },
@@ -136,6 +136,9 @@ const styles = {
     gap: '1rem',
     marginBottom: '1rem',
   },
+  font: {
+    fontFamily: 'lucinda',
+  },
   tile: {
     backgroundColor: '#6b8f71', // Sage green
     color: '#f4f7f5', // Light sage text
@@ -157,6 +160,7 @@ const styles = {
     marginRight: '1rem',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     color: '#2f4f4f', // Evergreen text
+  
   },
   feedList: {
     listStyle: 'none',

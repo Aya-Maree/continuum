@@ -175,6 +175,7 @@ const styles = {
     borderRadius: '4px',
     cursor: 'pointer',
     textAlign: 'center',
+    
   },
   patientDetails: {
     padding: '1rem',
@@ -193,6 +194,8 @@ const styles = {
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
+    
+    
   },
   popup: {
     position: 'absolute',
