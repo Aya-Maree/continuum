@@ -49,7 +49,7 @@ const Patient = () => {
           </div>
           <div style={styles.region}>
             <h2 style={styles.regionHeading}>Regions</h2>
-            <Map/>
+            <Map />
           </div>
         </div>
       </main>

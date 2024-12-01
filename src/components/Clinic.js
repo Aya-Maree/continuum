@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import Map from "./Map/Map";
 
 const Clinic = () => {
   const feeds = [
-    { icon: '👤', title: 'New Patient Record', time: '15 min' },
-    { icon: '🔔', title: 'Physician Update', time: '21 min' },
-    { icon: '👥', title: 'New Patient Record', time: '22 min' },
-    { icon: '💬', title: 'New Patient Message', time: '26 min' },
-    { icon: '🔖', title: 'Check Information for Patient X', time: '32 min' },
-    { icon: '💻', title: 'Database Update', time: '35 min' },
-    { icon: '🔗', title: 'New Shared Information', time: '45 min' },
+    { icon: "👤", title: "New Patient Record", time: "15 min" },
+    { icon: "🔔", title: "Physician Update", time: "21 min" },
+    { icon: "👥", title: "New Patient Record", time: "22 min" },
+    { icon: "💬", title: "New Patient Message", time: "26 min" },
+    { icon: "🔖", title: "Check Information for Patient X", time: "32 min" },
+    { icon: "💻", title: "Database Update", time: "35 min" },
+    { icon: "🔗", title: "New Shared Information", time: "45 min" },
   ];
 
   return (
@@ -17,7 +17,9 @@ const Clinic = () => {
       {/* Header */}
       <header style={styles.header}>
         <h1>continuum</h1>
-        <p>Welcome, <span style={styles.highlight}>Clinic</span></p>
+        <p>
+          Welcome, <span style={styles.highlight}>Clinic</span>
+        </p>
       </header>
 
       {/* Main Content */}
@@ -54,7 +56,7 @@ const Clinic = () => {
           </div>
           <div style={styles.region}>
             <h2>Regions</h2>
-            <Map/>
+            <Map />
           </div>
         </div>
       </main>
@@ -87,96 +89,96 @@ const Clinic = () => {
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: 'Arial, sans-serif',
-    height: '100vh',
-    backgroundColor: '#f4f7f5', // Light sage background
+    display: "flex",
+    flexDirection: "column",
+    fontFamily: "Arial, sans-serif",
+    height: "100vh",
+    backgroundColor: "#f4f7f5", // Light sage background
   },
   header: {
-    backgroundColor: '#2f4f4f', // Dark evergreen
-    color: '#f4f7f5', // Light sage
-    padding: '1rem',
-    textAlign: 'center',
+    backgroundColor: "#2f4f4f", // Dark evergreen
+    color: "#f4f7f5", // Light sage
+    padding: "1rem",
+    textAlign: "center",
   },
   highlight: {
-    color: '#9abf88', // Sage green accent
-    fontWeight: 'bold',
+    color: "#9abf88", // Sage green accent
+    fontWeight: "bold",
   },
   sidebar: {
-    backgroundColor: '#e6edea', // Light sage green
-    width: '15%',
-    padding: '1rem',
-    float: 'left',
-    color: '#2f4f4f', // Evergreen text
+    backgroundColor: "#e6edea", // Light sage green
+    width: "15%",
+    padding: "1rem",
+    float: "left",
+    color: "#2f4f4f", // Evergreen text
   },
   navItem: {
-    margin: '0.5rem 0',
+    margin: "0.5rem 0",
   },
   main: {
     flex: 1,
-    padding: '1rem',
-    backgroundColor: '#f9fbf9', // Very light sage
+    padding: "1rem",
+    backgroundColor: "#f9fbf9", // Very light sage
   },
   tilesContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginBottom: '1rem',
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: "1rem",
   },
   tile: {
-    backgroundColor: '#6b8f71', // Sage green
-    color: '#f4f7f5', // Light sage text
-    padding: '1rem',
-    borderRadius: '8px',
-    textAlign: 'center',
+    backgroundColor: "#6b8f71", // Sage green
+    color: "#f4f7f5", // Light sage text
+    padding: "1rem",
+    borderRadius: "8px",
+    textAlign: "center",
     flex: 1,
-    margin: '0 0.5rem',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    margin: "0 0.5rem",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   },
   feedsRegions: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '1rem',
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: "1rem",
   },
   feeds: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    padding: '1rem',
-    marginRight: '1rem',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    padding: "1rem",
+    marginRight: "1rem",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   },
   feedList: {
-    listStyle: 'none',
+    listStyle: "none",
     padding: 0,
   },
   feedItem: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0.5rem 0',
-    color: '#2f4f4f', // Evergreen text
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "0.5rem 0",
+    color: "#2f4f4f", // Evergreen text
   },
   feedIcon: {
-    marginRight: '0.5rem',
-    color: '#6b8f71', // Sage green icons
+    marginRight: "0.5rem",
+    color: "#6b8f71", // Sage green icons
   },
   feedTime: {
-    color: '#888',
-    fontSize: '0.8rem',
+    color: "#888",
+    fontSize: "0.8rem",
   },
   region: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    padding: '1rem',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    padding: "1rem",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   },
   footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    backgroundColor: '#2f4f4f', // Dark evergreen
-    color: '#f4f7f5', // Light sage
-    padding: '1rem',
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "#2f4f4f", // Dark evergreen
+    color: "#f4f7f5", // Light sage
+    padding: "1rem",
   },
 };
 
