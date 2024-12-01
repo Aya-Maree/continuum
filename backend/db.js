@@ -11,12 +11,14 @@ mongoose.connect(uri)
     });
 
 // Patient Schema
-const patientSchema = mongoose.Schema({
-    id: { type: Number, unique: true, required: true }, // Auto-incrementing numeric ID
-    name: { type: String, required: true, trim: true },
-    record: { type: String, trim: true },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' } // Reference to the User model
-}, { timestamps: true });
+const patientSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    age: { type: Number, required: true },
+    gender: { type: String, required: true },
+    email: { type: String },
+    file: { type: String, required: true }, // Path to the uploaded EMR file
+    uploadedAt: { type: Date, default: Date.now },
+  });
 
 // Appointment Schema
 const appointmentSchema = mongoose.Schema({
