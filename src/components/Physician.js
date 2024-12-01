@@ -1,29 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PatientFiles from './PatientFiles';
+import Map from "./Map/Map";
 
 const Physician = () => {
+  const [showPatientFiles, setShowPatientFiles] = useState(false);
+
+  const patients = [
+    { id: 1, name: 'Alice Smith', record: 'Record 1' },
+    { id: 2, name: 'Bob Johnson', record: 'Record 2' },
+    { id: 3, name: 'Charlie Davis', record: 'Record 3' },
+  ];
+
   const feeds = [
-    { icon: '👤', title: 'Patient Information Uploaded', time: '3 mins' },
+    { icon: '👤', title:  'Patient Information Uploaded', time: '3 mins' },
     { icon: '🔔', title: 'Clinic Update', time: '10 mins' },
     { icon: '👥', title: 'Patient Update', time: '16 mins' },
     { icon: '💬', title: 'New Message from Patient', time: '19 mins' },
   ];
 
+  const handleNavigateToPatientFiles = () => {
+    setShowPatientFiles(true);
+  };
+
+  const handleBackToDashboard = () => {
+    setShowPatientFiles(false);
+  };
+
   return (
     <div className="dashboard-container" style={styles.container}>
-      {/* Header */}
-      <header style={styles.header}>
-        <h1>continuum</h1>
-        <p>Welcome, <span style={styles.highlight}>Physician John Doe</span></p>
-      </header>
+      {showPatientFiles ? (
+        <PatientFiles patients={patients} onBack={handleBackToDashboard} />
+      ) : (
+        <>
+          {/* Header */}
+          <header style={styles.header}>
+            <h1>continuum</h1>
+            <p>
+              Welcome, <span style={styles.highlight}>Physician John Doe</span>
+            </p>
+          </header>
 
-      {/* Main Content */}
-      <main style={styles.main}>
-        {/* Dashboard Tiles */}
-        <div style={styles.tilesContainer}>
-          <div style={styles.tile}>
-            <h2>Clinic Navigation</h2>
-          </div>
-        </div>
+          {/* Main Content */}
+          <main style={styles.main}>
+            {/* Dashboard Tiles */}
+            <div style={styles.tilesContainer}>
+              <div style={styles.tile}>
+                <h2 style={styles.font}>Clinic Navigation</h2>
+                <p>Navigate through clinic-specific options here.</p>
+              </div>
+              <div style={styles.tile}>
+                <h2>View Patient Files</h2>
+                <button
+                  style={styles.button}
+                  onClick={handleNavigateToPatientFiles}
+                >
+                  Open Patient Files
+                </button>
+              </div>
+            </div>
 
         {/* Feeds and Regions */}
         <div style={styles.feedsRegions}>
@@ -41,33 +75,35 @@ const Physician = () => {
           </div>
           <div style={styles.region}>
             <h2>Regions</h2>
-            <p>Google Regional Map</p>
+            <Map/>
           </div>
         </div>
       </main>
 
-      {/* Footer */}
-      <footer style={styles.footer}>
-        <div>
-          <h3>Demographic</h3>
-          <p>Language</p>
-          <p>Country</p>
-          <p>City</p>
-        </div>
-        <div>
-          <h3>System</h3>
-          <p>Browser</p>
-          <p>OS</p>
-          <p>More</p>
-        </div>
-        <div>
-          <h3>Target</h3>
-          <p>Users</p>
-          <p>Active</p>
-          <p>Geo</p>
-          <p>Interests</p>
-        </div>
-      </footer>
+          {/* Footer */}
+          <footer style={styles.footer}>
+            <div>
+              <h3>Demographic</h3>
+              <p>Language</p>
+              <p>Country</p>
+              <p>City</p>
+            </div>
+            <div>
+              <h3>System</h3>
+              <p>Browser</p>
+              <p>OS</p>
+              <p>More</p>
+            </div>
+            <div>
+              <h3>Target</h3>
+              <p>Users</p>
+              <p>Active</p>
+              <p>Geo</p>
+              <p>Interests</p>
+            </div>
+          </footer>
+        </>
+      )}
     </div>
   );
 };
@@ -76,7 +112,7 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    fontFamily: 'Arial, sans-serif',
+    
     height: '100vh',
     backgroundColor: '#f4f7f5', // Light sage background
   },
@@ -90,16 +126,6 @@ const styles = {
     color: '#9abf88', // Sage green accent
     fontWeight: 'bold',
   },
-  sidebar: {
-    backgroundColor: '#e6edea', // Light sage green
-    width: '15%',
-    padding: '1rem',
-    float: 'left',
-    color: '#2f4f4f', // Evergreen text
-  },
-  navItem: {
-    margin: '0.5rem 0',
-  },
   main: {
     flex: 1,
     padding: '1rem',
@@ -107,8 +133,12 @@ const styles = {
   },
   tilesContainer: {
     display: 'flex',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    gap: '1rem',
     marginBottom: '1rem',
+  },
+  font: {
+    fontFamily: 'lucinda',
   },
   tile: {
     backgroundColor: '#6b8f71', // Sage green
@@ -116,8 +146,6 @@ const styles = {
     padding: '2rem',
     borderRadius: '8px',
     textAlign: 'center',
-    flex: 1,
-    margin: '0 0.5rem',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   },
   feedsRegions: {
@@ -133,6 +161,7 @@ const styles = {
     marginRight: '1rem',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     color: '#2f4f4f', // Evergreen text
+  
   },
   feedList: {
     listStyle: 'none',
@@ -165,6 +194,15 @@ const styles = {
     backgroundColor: '#2f4f4f', // Dark evergreen
     color: '#f4f7f5', // Light sage
     padding: '1rem',
+  },
+  button: {
+    marginTop: '1rem',
+    padding: '0.5rem 1rem',
+    backgroundColor: '#9abf88',
+    color: '#f4f7f5',
+    border: 'none',
+    borderRadius: '4px',
+    cursor: 'pointer',
   },
 };
 
