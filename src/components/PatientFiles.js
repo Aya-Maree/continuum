@@ -1,30 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const PatientFiles = ({ patients, onBack }) => {
+const PatientFiles = ({ onBack }) => {
+  const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [appointments, setAppointments] = useState([
-    {
-      id: 1,
-      patientId: 1,
-      date: '2024-12-01',
-      reason: 'Follow-up Checkup',
-    },
-    {
-      id: 2,
-      patientId: 2,
-      date: '2024-12-05',
-      reason: 'Annual Physical',
-    },
-  ]);
+  const [appointments, setAppointments] = useState([]);
   const [showAppointmentsPopup, setShowAppointmentsPopup] = useState(false);
   const [newAppointment, setNewAppointment] = useState({ date: '', reason: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handlePatientClick = (patient) => {
+  // Fetch patients from the backend
+  useEffect(() => {
+    const fetchPatients = async () => {
+      try {
+        const response = await fetch('http://localhost:4000/patients');
+        if (!response.ok) throw new Error('Failed to fetch patients');
+        const data = await response.json();
+        setPatients(data);
+      } catch (err) {
+        console.error(err);
+        setError('Unable to load patients.');
+      }
+    };
+    fetchPatients();
+  }, []);
+
+  const handlePatientClick = async (patient) => {
     setSelectedPatient(patient);
+    try {
+      const response = await fetch(
+        `http://localhost:4000/appointments/patient/${patient.id}`
+      );
+      if (!response.ok) throw new Error('Failed to fetch appointments');
+      const data = await response.json();
+      setAppointments(data);
+    } catch (err) {
+      console.error(err);
+      setError('Unable to load appointments.');
+    }
   };
 
   const handleBackToList = () => {
     setSelectedPatient(null);
+    setAppointments([]);
   };
 
   const handleFileUpload = (event) => {
@@ -40,34 +58,75 @@ const PatientFiles = ({ patients, onBack }) => {
     setShowAppointmentsPopup(false);
   };
 
-  const handleAddAppointment = () => {
-    setAppointments((prevAppointments) => [
-      ...prevAppointments,
-      { id: Date.now(), patientId: selectedPatient.id, ...newAppointment },
-    ]);
-    setNewAppointment({ date: '', reason: '' });
+  const handleAddAppointment = async () => {
+    if (!newAppointment.date || !newAppointment.reason) {
+      alert('Please fill in all fields');
+      return;
+    }
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:4000/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: selectedPatient.id,
+          date: newAppointment.date,
+          reason: newAppointment.reason,
+        }),
+      });
+      if (!response.ok) throw new Error('Failed to add appointment');
+      const data = await response.json();
+      setAppointments((prevAppointments) => [...prevAppointments, data]);
+      setNewAppointment({ date: '', reason: '' });
+      alert('Appointment added successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Unable to add appointment.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleEditAppointment = (id, type, value) => {
+  const handleEditAppointment = async (id, type, value) => {
     setAppointments((prevAppointments) =>
       prevAppointments.map((appointment) =>
-        appointment.id === id ? { ...appointment, [type]: value } : appointment
+        appointment._id === id ? { ...appointment, [type]: value } : appointment
       )
     );
+    // Optionally update appointment in the backend
   };
 
-  const handleDeleteAppointment = (id) => {
-    setAppointments((prevAppointments) =>
-      prevAppointments.filter((appointment) => appointment.id !== id)
-    );
+  const handleDeleteAppointment = async (id) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`http://localhost:4000/appointments/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error('Failed to delete appointment');
+      setAppointments((prevAppointments) =>
+        prevAppointments.filter((appointment) => appointment._id !== id)
+      );
+      alert('Appointment deleted successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Unable to delete appointment.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div style={styles.container}>
+      {error && <p style={styles.error}>{error}</p>}
       {selectedPatient ? (
         <div style={styles.patientDetails}>
           <h2>Patient Record: {selectedPatient.name}</h2>
-          <input type="file" accept="application/pdf" onChange={handleFileUpload} style={styles.fileInput} />
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={handleFileUpload}
+            style={styles.fileInput}
+          />
           <button style={styles.button} onClick={handleViewAppointments}>
             View Upcoming Appointments
           </button>
@@ -79,33 +138,35 @@ const PatientFiles = ({ patients, onBack }) => {
             <div style={styles.popup}>
               <h3>Upcoming Appointments</h3>
               <ul style={styles.list}>
-                {appointments
-                  .filter((appointment) => appointment.patientId === selectedPatient.id)
-                  .map((appointment) => (
-                    <li key={appointment.id} style={styles.listItem}>
-                      <p>Date: {appointment.date}</p>
-                      <p>Reason: {appointment.reason}</p>
-                      <div>
-                        <label>
-                          Reschedule:
-                          <input
-                            type="date"
-                            value={appointment.date}
-                            onChange={(e) =>
-                              handleEditAppointment(appointment.id, 'date', e.target.value)
-                            }
-                            style={styles.input}
-                          />
-                        </label>
-                        <button
-                          style={styles.cancelButton}
-                          onClick={() => handleDeleteAppointment(appointment.id)}
-                        >
-                          Cancel
-                        </button>
-                      </div>
-                    </li>
-                  ))}
+                {appointments.map((appointment) => (
+                  <li key={appointment._id} style={styles.listItem}>
+                    <p>Date: {appointment.date}</p>
+                    <p>Reason: {appointment.reason}</p>
+                    <div>
+                      <label>
+                        Reschedule:
+                        <input
+                          type="date"
+                          value={appointment.date}
+                          onChange={(e) =>
+                            handleEditAppointment(
+                              appointment._id,
+                              'date',
+                              e.target.value
+                            )
+                          }
+                          style={styles.input}
+                        />
+                      </label>
+                      <button
+                        style={styles.cancelButton}
+                        onClick={() => handleDeleteAppointment(appointment._id)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </li>
+                ))}
               </ul>
               <div style={styles.newAppointment}>
                 <h4>New Appointment</h4>
@@ -114,7 +175,9 @@ const PatientFiles = ({ patients, onBack }) => {
                   <input
                     type="date"
                     value={newAppointment.date}
-                    onChange={(e) => setNewAppointment({ ...newAppointment, date: e.target.value })}
+                    onChange={(e) =>
+                      setNewAppointment({ ...newAppointment, date: e.target.value })
+                    }
                     style={styles.input}
                   />
                 </label>
@@ -123,7 +186,9 @@ const PatientFiles = ({ patients, onBack }) => {
                   <input
                     type="text"
                     value={newAppointment.reason}
-                    onChange={(e) => setNewAppointment({ ...newAppointment, reason: e.target.value })}
+                    onChange={(e) =>
+                      setNewAppointment({ ...newAppointment, reason: e.target.value })
+                    }
                     style={styles.input}
                   />
                 </label>
@@ -161,71 +226,11 @@ const PatientFiles = ({ patients, onBack }) => {
 };
 
 const styles = {
-  container: {
-    padding: '1rem',
-  },
-  list: {
-    listStyle: 'none',
-    padding: 0,
-  },
-  listItem: {
-    padding: '0.5rem',
-    margin: '0.5rem 0',
-    backgroundColor: '#e6edea',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    textAlign: 'center',
-    
-  },
-  patientDetails: {
-    padding: '1rem',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-  },
-  fileInput: {
-    marginTop: '1rem',
-  },
-  button: {
-    marginTop: '1rem',
-    padding: '0.5rem 1rem',
-    backgroundColor: '#6b8f71',
-    color: '#f4f7f5',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    
-    
-  },
-  popup: {
-    position: 'absolute',
-    top: '20%',
-    left: '30%',
-    width: '40%',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    padding: '1rem',
-    zIndex: 1000,
-  },
-  newAppointment: {
-    marginTop: '1rem',
-  },
-  input: {
-    margin: '0.5rem 0',
-    padding: '0.5rem',
-    width: '100%',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  },
-  cancelButton: {
-    backgroundColor: '#d9534f',
-    color: '#fff',
-    padding: '0.5rem 1rem',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginLeft: '1rem',
+  // Keep styles from your original code
+  error: {
+    color: '#e53e3e',
+    fontSize: '1rem',
+    marginBottom: '1rem',
   },
 };
 
