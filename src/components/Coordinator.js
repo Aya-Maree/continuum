@@ -1,4 +1,5 @@
 import React from 'react';
+import Map from "./Map/Map";
 
 const Coordinator = () => {
   const feeds = [
@@ -50,7 +51,7 @@ const Coordinator = () => {
           </div>
           <div style={styles.region}>
             <h2>Regions</h2>
-            <p>Google Regional Map</p>
+            <Map/>
           </div>
         </div>
       </main>

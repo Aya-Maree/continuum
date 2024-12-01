@@ -1,8 +1,9 @@
 import React from 'react';
+import Map from "./Map/Map";
 
 const Physician = () => {
   const feeds = [
-    { icon: '👤', title: 'Patient Information Uploaded', time: '3 mins' },
+    { icon: '👤', title:  'Patient Information Uploaded', time: '3 mins' },
     { icon: '🔔', title: 'Clinic Update', time: '10 mins' },
     { icon: '👥', title: 'Patient Update', time: '16 mins' },
     { icon: '💬', title: 'New Message from Patient', time: '19 mins' },
@@ -41,7 +42,7 @@ const Physician = () => {
           </div>
           <div style={styles.region}>
             <h2>Regions</h2>
-            <p>Google Regional Map</p>
+            <Map/>
           </div>
         </div>
       </main>

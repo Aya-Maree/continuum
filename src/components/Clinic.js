@@ -1,4 +1,5 @@
 import React from 'react';
+import Map from "./Map/Map";
 
 const Clinic = () => {
   const feeds = [
@@ -53,7 +54,7 @@ const Clinic = () => {
           </div>
           <div style={styles.region}>
             <h2>Regions</h2>
-            <p>Google Regional Map</p>
+            <Map/>
           </div>
         </div>
       </main>

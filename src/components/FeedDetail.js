@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 const FeedDetail = () => {
   const { id } = useParams();
 
-  // Dummy data for feeds
   const feedDetails = {
     1: { title: 'Medical Record Updated', detail: 'Your medical records have been updated successfully.' },
     2: { title: 'Physician Update', detail: 'Your physician has added new notes to your profile.' },
