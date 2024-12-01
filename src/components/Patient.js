@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 const Patient = () => {
   const feeds = [
@@ -9,8 +9,33 @@ const Patient = () => {
     { icon: '🔖', title: 'Appointment Confirmed', time: '28 mins' },
   ];
 
+  useEffect(() => {
+    // Create the script element
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://cdn.voiceflow.com/widget/bundle.mjs";
+    
+    // Define the script's onload behavior
+    script.onload = () => {
+      window.voiceflow.chat.load({
+        verify: { projectID: "674b77a6da1cb2ab8ae7db8e" },
+        url: "https://general-runtime.voiceflow.com",
+        versionID: "production",
+      });
+    };
+
+    // Append the script to the document body
+    document.body.appendChild(script);
+
+    // Cleanup: Remove the script when the component unmounts
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div className="dashboard-container" style={styles.container}>
+      
       {/* Header */}
       <header style={styles.header}>
         <h1>continuum</h1>
