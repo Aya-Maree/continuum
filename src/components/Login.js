@@ -2,24 +2,24 @@ import React, { useState } from 'react';
 import logo from '../continuumlogo.png'; // Replace with the actual path to your uploaded logo file
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (username === '' || password === '') {
-      setError('Both fields are required.');
+    if (username === "" || password === "") {
+      setError("Both fields are required.");
       return;
     }
 
     try {
       // Send login request to the backend
-      const response = await fetch('http://localhost:4000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:4000/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
 
@@ -27,18 +27,18 @@ const Login = () => {
 
       if (response.ok) {
         setMessage(data.message); // Display success message
-        setError('');
+        setError("");
         // Redirect based on role or endpoint
-        if (data.redirectTo === '/patient') {
-          window.location.href = '/patient'; // Replace with React Router navigation if using it
-        } else if (data.redirectTo === '/physician') {
-          window.location.href = '/physician'; // Replace with React Router navigation if using it
+        if (data.redirectTo === "/patient") {
+          window.location.href = "/patient"; // Replace with React Router navigation if using it
+        } else if (data.redirectTo === "/physician") {
+          window.location.href = "/physician"; // Replace with React Router navigation if using it
         }
       } else {
-        setError(data.error || 'Invalid login credentials.');
+        setError(data.error || "Invalid login credentials.");
       }
     } catch (err) {
-      setError('Something went wrong. Please try again later.');
+      setError("Something went wrong. Please try again later.");
     }
   };
 
@@ -123,10 +123,10 @@ const styles = {
   },
   main: {
     flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '2rem',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "2rem",
   },
   card: {
     backgroundColor: '#fff',
@@ -149,19 +149,19 @@ const styles = {
     fontFamily: 'helvetica'
   },
   inputGroup: {
-    textAlign: 'left',
+    textAlign: "left",
   },
   label: {
-    display: 'block',
-    marginBottom: '0.5rem',
-    fontWeight: 'bold',
+    display: "block",
+    marginBottom: "0.5rem",
+    fontWeight: "bold",
   },
   input: {
-    width: '100%',
-    padding: '0.5rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-    fontSize: '1rem',
+    width: "100%",
+    padding: "0.5rem",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
+    fontSize: "1rem",
   },
   button: {
     padding: '0.75rem',
@@ -175,9 +175,9 @@ const styles = {
     transition: 'background-color 0.3s',
   },
   error: {
-    color: '#e53e3e',
-    fontSize: '0.9rem',
-    marginBottom: '1rem',
+    color: "#e53e3e",
+    fontSize: "0.9rem",
+    marginBottom: "1rem",
   },
   footer: {
     backgroundColor: '#274d20',

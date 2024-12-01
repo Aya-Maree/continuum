@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import PatientFiles from './PatientFiles';
+import React, { useState } from "react";
+import PatientFiles from "./PatientFiles";
 import Map from "./Map/Map";
 
 const Physician = () => {
   const [showPatientFiles, setShowPatientFiles] = useState(false);
 
   const patients = [
-    { id: 1, name: 'Alice Smith', record: 'Record 1' },
-    { id: 2, name: 'Bob Johnson', record: 'Record 2' },
-    { id: 3, name: 'Charlie Davis', record: 'Record 3' },
+    { id: 1, name: "Alice Smith", record: "Record 1" },
+    { id: 2, name: "Bob Johnson", record: "Record 2" },
+    { id: 3, name: "Charlie Davis", record: "Record 3" },
   ];
 
   const feeds = [
-    { icon: '👤', title:  'Patient Information Uploaded', time: '3 mins' },
-    { icon: '🔔', title: 'Clinic Update', time: '10 mins' },
-    { icon: '👥', title: 'Patient Update', time: '16 mins' },
-    { icon: '💬', title: 'New Message from Patient', time: '19 mins' },
+    { icon: "👤", title: "Patient Information Uploaded", time: "3 mins" },
+    { icon: "🔔", title: "Clinic Update", time: "10 mins" },
+    { icon: "👥", title: "Patient Update", time: "16 mins" },
+    { icon: "💬", title: "New Message from Patient", time: "19 mins" },
   ];
 
   const handleNavigateToPatientFiles = () => {
@@ -59,26 +59,26 @@ const Physician = () => {
               </div>
             </div>
 
-        {/* Feeds and Regions */}
-        <div style={styles.feedsRegions}>
-          <div style={styles.feeds}>
-            <h2>Feeds</h2>
-            <ul style={styles.feedList}>
-              {feeds.map((feed, index) => (
-                <li key={index} style={styles.feedItem}>
-                  <span style={styles.feedIcon}>{feed.icon}</span>
-                  <span>{feed.title}</span>
-                  <span style={styles.feedTime}>{feed.time}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div style={styles.region}>
-            <h2>Regions</h2>
-            <Map/>
-          </div>
-        </div>
-      </main>
+            {/* Feeds and Regions */}
+            <div style={styles.feedsRegions}>
+              <div style={styles.feeds}>
+                <h2>Feeds</h2>
+                <ul style={styles.feedList}>
+                  {feeds.map((feed, index) => (
+                    <li key={index} style={styles.feedItem}>
+                      <span style={styles.feedIcon}>{feed.icon}</span>
+                      <span>{feed.title}</span>
+                      <span style={styles.feedTime}>{feed.time}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div style={styles.region}>
+                <h2>Regions</h2>
+                <Map />
+              </div>
+            </div>
+          </main>
 
           {/* Footer */}
           <footer style={styles.footer}>
@@ -110,99 +110,98 @@ const Physician = () => {
 
 const styles = {
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    
-    height: '100vh',
-    backgroundColor: '#f4f7f5', // Light sage background
+    display: "flex",
+    flexDirection: "column",
+
+    height: "100vh",
+    backgroundColor: "#f4f7f5", // Light sage background
   },
   header: {
-    backgroundColor: '#2f4f4f', // Dark evergreen
-    color: '#f4f7f5', // Light sage text
-    padding: '1rem',
-    textAlign: 'center',
+    backgroundColor: "#2f4f4f", // Dark evergreen
+    color: "#f4f7f5", // Light sage text
+    padding: "1rem",
+    textAlign: "center",
   },
   highlight: {
-    color: '#9abf88', // Sage green accent
-    fontWeight: 'bold',
+    color: "#9abf88", // Sage green accent
+    fontWeight: "bold",
   },
   main: {
     flex: 1,
-    padding: '1rem',
-    backgroundColor: '#f9fbf9', // Very light sage
+    padding: "1rem",
+    backgroundColor: "#f9fbf9", // Very light sage
   },
   tilesContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1rem',
-    marginBottom: '1rem',
+    display: "flex",
+    flexDirection: "column",
+    gap: "1rem",
+    marginBottom: "1rem",
   },
   font: {
-    fontFamily: 'lucinda',
+    fontFamily: "lucinda",
   },
   tile: {
-    backgroundColor: '#6b8f71', // Sage green
-    color: '#f4f7f5', // Light sage text
-    padding: '2rem',
-    borderRadius: '8px',
-    textAlign: 'center',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    backgroundColor: "#6b8f71", // Sage green
+    color: "#f4f7f5", // Light sage text
+    padding: "2rem",
+    borderRadius: "8px",
+    textAlign: "center",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
   },
   feedsRegions: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    marginTop: '1rem',
+    display: "flex",
+    justifyContent: "space-between",
+    marginTop: "1rem",
   },
   feeds: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    padding: '1rem',
-    marginRight: '1rem',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    color: '#2f4f4f', // Evergreen text
-  
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    padding: "1rem",
+    marginRight: "1rem",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    color: "#2f4f4f", // Evergreen text
   },
   feedList: {
-    listStyle: 'none',
+    listStyle: "none",
     padding: 0,
   },
   feedItem: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    padding: '0.5rem 0',
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "0.5rem 0",
   },
   feedIcon: {
-    marginRight: '0.5rem',
-    color: '#6b8f71', // Sage green icons
+    marginRight: "0.5rem",
+    color: "#6b8f71", // Sage green icons
   },
   feedTime: {
-    color: '#888',
-    fontSize: '0.8rem',
+    color: "#888",
+    fontSize: "0.8rem",
   },
   region: {
     flex: 1,
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    padding: '1rem',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    color: '#2f4f4f', // Evergreen text
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    padding: "1rem",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+    color: "#2f4f4f", // Evergreen text
   },
   footer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    backgroundColor: '#2f4f4f', // Dark evergreen
-    color: '#f4f7f5', // Light sage
-    padding: '1rem',
+    display: "flex",
+    justifyContent: "space-between",
+    backgroundColor: "#2f4f4f", // Dark evergreen
+    color: "#f4f7f5", // Light sage
+    padding: "1rem",
   },
   button: {
-    marginTop: '1rem',
-    padding: '0.5rem 1rem',
-    backgroundColor: '#9abf88',
-    color: '#f4f7f5',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
+    marginTop: "1rem",
+    padding: "0.5rem 1rem",
+    backgroundColor: "#9abf88",
+    color: "#f4f7f5",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
   },
 };
 
